@@ -1,0 +1,13 @@
+procs:
+  db:
+    shell: 'make db_dev'
+    autostart: true
+  tailwind:
+    shell: 'make tailwind'
+    autostart: true
+  templ:
+    shell: 'make templ'
+    autostart: true
+  serve:
+    shell: 'make watch'
+    autostart: true
