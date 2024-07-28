@@ -1,10 +1,11 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE TABLE diaper
+CREATE TABLE bottle
 (
-    diaper_id   TEXT PRIMARY KEY,
+    bottle_id   TEXT PRIMARY KEY,
     person_id   TEXT        NOT NULL,
-    type TEXT        NOT NULL CHECK ( type IN ('PEE', 'POO', 'MIX') ),
+    bottle_type TEXT        NOT NULL CHECK ( bottle_type IN ('BREAST', 'FORMULA') ),
+    volume_ml   INTEGER     NOT NULL,
     occurred_at TIMESTAMP   NOT NULL,
     notes       TEXT        NOT NULL,
     created_at  TIMESTAMP   NOT NULL,
@@ -16,5 +17,5 @@ CREATE TABLE diaper
 
 -- +goose Down
 -- +goose StatementBegin
-drop table diaper;
+drop table bottle;
 -- +goose StatementEnd
