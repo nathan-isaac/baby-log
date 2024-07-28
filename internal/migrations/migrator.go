@@ -11,34 +11,29 @@ type Migrator struct {
 }
 
 func New(db *sql.DB) (Migrator, error) {
-	return Migrator{db: db}, nil
+	goose.SetBaseFS(schema.EmbedMigrations)
+
+	if err := goose.SetDialect("sqlite"); err != nil {
+		return Migrator{}, err
+	}
+
+	return Migrator{
+		db: db,
+	}, nil
 }
 
 func (it Migrator) Up() error {
-	goose.SetBaseFS(schema.EmbedMigrations)
-
-	if err := goose.SetDialect("turso"); err != nil {
-		return err
-	}
-
 	return goose.Up(it.db, ".")
 }
 
 func (it Migrator) Status() error {
-	goose.SetBaseFS(schema.EmbedMigrations)
-
-	if err := goose.SetDialect("sqlite"); err != nil {
-		return err
-	}
 	return goose.Status(it.db, ".")
 }
 
 func (it Migrator) Create(name string) error {
-	goose.SetBaseFS(schema.EmbedMigrations)
-
-	if err := goose.SetDialect("turso"); err != nil {
-		return err
-	}
-
 	return goose.Create(it.db, "./schema", name, "sql")
+}
+
+func (it Migrator) Version() error {
+	return goose.Version(it.db, ".")
 }

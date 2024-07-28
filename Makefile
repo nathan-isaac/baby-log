@@ -35,7 +35,7 @@ templ_clean:
 	@find ./internal/views -type f -name "*_templ.txt" -delete
 
 db_dev:
-	@turso dev --db-file ./.storage/local.sqlite
+	@turso dev --db-file ./.storage/local.sqlite --port 8090
 
 # Run the application
 run:
