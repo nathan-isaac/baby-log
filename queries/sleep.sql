@@ -6,7 +6,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?);
 SELECT *
 FROM sleep
 WHERE person_id = ?
-ORDER BY started_at;
+ORDER BY started_at DESC;
 
 -- name: FindSleep :one
 SELECT *

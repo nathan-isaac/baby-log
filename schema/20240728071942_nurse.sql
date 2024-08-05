@@ -9,7 +9,7 @@ CREATE TABLE nurse
     right_volume_ml   INTEGER     NOT NULL,
     left_volume_ml   INTEGER     NOT NULL,
     started_at  TIMESTAMP   NOT NULL,
-    ended_at    TIMESTAMP   NOT NULL,
+    ended_at    TIMESTAMP,
     notes       TEXT        NOT NULL,
     created_at  TIMESTAMP   NOT NULL,
     updated_at  TIMESTAMP   NOT NULL,

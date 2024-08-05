@@ -1,0 +1,50 @@
+package views
+
+import "baby-log/internal/views/layout"
+import "baby-log/internal/views/components"
+import "fmt"
+import "baby-log/internal/gateway"
+
+templ NurseNew(person gateway.Person) {
+	@layout.AdminBase() {
+		@components.Container() {
+			<div class="space-y-10 divide-y divide-gray-900/10">
+				<div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
+					<div class="px-4 sm:px-0">
+						<h2 class="text-base font-semibold leading-7 text-gray-900">Nurse Entry</h2>
+						<p class="mt-1 text-sm leading-6 text-gray-600">Track nurse data.</p>
+					</div>
+					<form hx-post="/admin/nurse" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+						<input type="hidden" name="person_id" value={ person.PersonID }/>
+						<div class="px-4 py-6 sm:p-8">
+							<div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+								<div class="sm:col-span-3 sm:col-start-1">
+									<label for="start" class="block text-sm font-medium leading-6 text-gray-900">Start</label>
+									<div class="mt-2">
+										<input type="datetime-local" name="start" id="start" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+									</div>
+								</div>
+								<div class="sm:col-span-3">
+									<label for="end" class="block text-sm font-medium leading-6 text-gray-900">End</label>
+									<div class="mt-2">
+										<input type="datetime-local" name="end" id="end" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+									</div>
+								</div>
+								<div class="col-span-full">
+									<label for="notes" class="block text-sm font-medium leading-6 text-gray-900">Notes</label>
+									<div class="mt-2">
+										<textarea rows="4" name="notes" id="notes" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+							<a href={ templ.URL(fmt.Sprintf("/admin/person/%s/activity", person.PersonID)) } type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
+							<button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		}
+	}
+}

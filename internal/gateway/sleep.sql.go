@@ -7,6 +7,7 @@ package gateway
 
 import (
 	"context"
+	"database/sql"
 	"time"
 )
 
@@ -19,7 +20,7 @@ type CreateSleepParams struct {
 	SleepID   string
 	PersonID  string
 	StartedAt time.Time
-	EndedAt   time.Time
+	EndedAt   sql.NullTime
 	Notes     string
 	CreatedAt time.Time
 	UpdatedAt time.Time
@@ -42,7 +43,7 @@ const filterSleep = `-- name: FilterSleep :many
 SELECT sleep_id, person_id, started_at, ended_at, notes, created_at, updated_at
 FROM sleep
 WHERE person_id = ?
-ORDER BY started_at
+ORDER BY started_at DESC
 `
 
 func (q *Queries) FilterSleep(ctx context.Context, personID string) ([]Sleep, error) {

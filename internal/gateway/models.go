@@ -38,7 +38,7 @@ type Nurse struct {
 	RightVolumeMl        int64
 	LeftVolumeMl         int64
 	StartedAt            time.Time
-	EndedAt              time.Time
+	EndedAt              sql.NullTime
 	Notes                string
 	CreatedAt            time.Time
 	UpdatedAt            time.Time
@@ -57,7 +57,7 @@ type Sleep struct {
 	SleepID   string
 	PersonID  string
 	StartedAt time.Time
-	EndedAt   time.Time
+	EndedAt   sql.NullTime
 	Notes     string
 	CreatedAt time.Time
 	UpdatedAt time.Time
